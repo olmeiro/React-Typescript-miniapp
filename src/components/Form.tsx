@@ -12,7 +12,8 @@ interface FormState {
 }
 
 interface FormProps {
-  onNewSub:  React.Dispatch<React.SetStateAction<Sub[]>> 
+  // onNewSub:  React.Dispatch<React.SetStateAction<Sub[]>> //para no usar useState que viene del padre:
+  onNewSub: (newSub:Sub) => void;
 }
 
 const Form = ({ onNewSub }: FormProps) => {
@@ -33,7 +34,8 @@ const Form = ({ onNewSub }: FormProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onNewSub(subs => ([...subs, inputValues]));
+    // onNewSub(subs => ([...subs, inputValues])); segun la linea16 =>
+    onNewSub(inputValues); //el input value es de tipo Sub
   }
 
   return (
