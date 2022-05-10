@@ -1,3 +1,4 @@
+import axios from "axios";
 import { appendFile } from "fs";
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
@@ -42,15 +43,12 @@ function App() {
   const divRef = useRef<HTMLDivElement>(null); //iniciarlo con null
 
   useEffect(() => {
-  //  setSubs(INITIALSTATE);
 
-    // const fetchSubs = (): Promise<any> => {
-    const fetchSubs = (): Promise<SubsResponseFromApi[]> => {
-      return fetch('http://localhost:3001/subs')
-              .then(res => res.json())
+    const fetchSubs = () => {
+      return axios.get<SubsResponseFromApi>('http://localhost:3001/subs')
+              .then(response => response.data)
     }
 
-    //map las props que necesitamos de la api para que coincidan con nuestra app =>
     const mapFromApiToSubs = (apiResponse: SubsResponseFromApi):Array<Sub> => {
         return apiResponse.map( subFromApi => {
           const {
@@ -69,22 +67,6 @@ function App() {
         })
     }
 
-    // fetch('http://localhost:3001/subs')
-    // fetchSubs()
-    // .then(res => res.json())
-    //   .then(subs => {
-    //     console.log( subs );
-    //     setSubs(subs);
-    //   })
-
-    //Uso mapFromApiToSubs =>
-    // fetchSubs()
-    //   .then(apiSubs => {
-    //     const subs = mapFromApiToSubs(apiSubs);
-    //     setSubs(subs);
-    //   });
-
-      //de forma funcional:
       fetchSubs()
         .then(mapFromApiToSubs)
         .then(setSubs);
