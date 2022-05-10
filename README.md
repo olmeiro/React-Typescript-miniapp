@@ -1,5 +1,9 @@
 # Getting Started with Create React App
 
+##REpo para estudiar typescript:
+
+`https://github.com/typescript-cheatsheets/react`
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

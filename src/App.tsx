@@ -44,9 +44,9 @@ function App() {
 
   useEffect(() => {
 
-    const fetchSubs = () => {
-      return axios.get<SubsResponseFromApi>('http://localhost:3001/subs')
-              .then(response => response.data)
+    const fetchSubs = async () => {
+      const response = await axios.get<SubsResponseFromApi>('http://localhost:3001/subs');
+      return response.data;
     }
 
     const mapFromApiToSubs = (apiResponse: SubsResponseFromApi):Array<Sub> => {
